@@ -1,7 +1,7 @@
 # Личный проект «Угадай мелодию» [![Build status][travis-image]][travis-url]
 
 * Студент: [Наталья Волчатова](https://up.htmlacademy.ru/ecmascript/4/user/415439).
-* Наставник: `Неизвестно`.
+* Наставник: [Владимир Коршунов](https://github.com/BekoBou).
 
 ---
 
