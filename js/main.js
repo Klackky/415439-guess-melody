@@ -5,15 +5,28 @@ const rightArrowKeycode = 39;
 const leftArrowKeycode = 37;
 let currentScreen = 0;
 
+// converting a Node List to an Array
 const allScreens = [].slice.call(nodes);
 
-function swap(arr, index1, index2) {
+/**
+* function responsible for swapping the value of two variables from array.
+ * @param {array} arr array we work with
+ * @param {number} index1 index of the first element
+ * @param {number} index2 index of the second element
+ * @return {array} transformed array
+ */
+const swap = (arr, index1, index2) => {
   [arr[index1], arr[index2]] = [arr[index2], arr[index1]];
   return arr;
-}
+};
 
 swap(allScreens, 1, 2);
 
+/**
+ * function responsible for rendering new screen
+ * @param {number} index index of current screen
+ * @return {node} new node element
+*/
 const renderScreen = (index) => {
   removePreviousScreen();
   const mainScreen = allScreens[index].cloneNode(true);
@@ -22,6 +35,9 @@ const renderScreen = (index) => {
   return mainScreen;
 };
 
+/**
+ * function responsible for removing previous screen
+*/
 const removePreviousScreen = () => {
   let oldScreen = mainScreenContainer.querySelector(`.main`);
   if (oldScreen) {
