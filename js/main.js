@@ -1,26 +1,16 @@
-const nodes = document.querySelector(`#templates`).content.querySelectorAll(`.main`);
-const mainScreenContainer = document.querySelector(`.main`);
-const fragment = document.createDocumentFragment();
-const rightArrowKeycode = 39;
-const leftArrowKeycode = 37;
-let currentScreen = 0;
-
-// converting a Node List to an Array
-const allScreens = [].slice.call(nodes);
-
-/**
-* function responsible for swapping the value of two variables from array.
- * @param {array} arr array we work with
- * @param {number} index1 index of the first element
- * @param {number} index2 index of the second element
- * @return {array} transformed array
- */
-const swap = (arr, index1, index2) => {
-  [arr[index1], arr[index2]] = [arr[index2], arr[index1]];
-  return arr;
-};
-
-swap(allScreens, 1, 2);
+const TEMPLATE = document.querySelector(`#templates`);
+const MAIN_SCREEN_CONTAINER = document.querySelector(`.main`);
+const RIGHT_ARROW_KEYCODE = 39;
+const LEFT_ARROW_KEYCODE = 37;
+const ALL_SCREENS = [
+  TEMPLATE.content.querySelector(`.main--welcome`),
+  TEMPLATE.content.querySelector(`.main--level-artist`),
+  TEMPLATE.content.querySelector(`.main--level-genre`),
+  TEMPLATE.content.querySelectorAll(`.main--result`)[0],
+  TEMPLATE.content.querySelectorAll(`.main--result`)[1],
+  TEMPLATE.content.querySelectorAll(`.main--result`)[2]
+];
+let currentScreenIndex = 0;
 
 /**
  * function responsible for rendering new screen
@@ -28,33 +18,34 @@ swap(allScreens, 1, 2);
  * @return {node} new node element
 */
 const renderScreen = (index) => {
-  removePreviousScreen();
-  const mainScreen = allScreens[index].cloneNode(true);
-  fragment.appendChild(mainScreen);
-  mainScreenContainer.appendChild(fragment);
+  removeExistingScreen();
+  const mainScreen = ALL_SCREENS[index].cloneNode(true);
+  MAIN_SCREEN_CONTAINER.appendChild(mainScreen);
   return mainScreen;
 };
 
 /**
- * function responsible for removing previous screen
+ * function responsible for removing existing screen
 */
-const removePreviousScreen = () => {
-  let oldScreen = mainScreenContainer.querySelector(`.main`);
-  if (oldScreen) {
-    oldScreen.parentNode.removeChild(oldScreen);
+const removeExistingScreen = () => {
+  let existingScreen = MAIN_SCREEN_CONTAINER.querySelector(`.main`);
+  if (existingScreen) {
+    existingScreen.parentNode.removeChild(existingScreen);
   }
 };
-
-const onArrowPress = (event) => {
-  if (event.keyCode === rightArrowKeycode && event.altKey) {
-    currentScreen = currentScreen < allScreens.length - 1 ? ++currentScreen : 0;
-    renderScreen(currentScreen);
+/**
+ * function responsible for switching screens
+ * @param {event} event keyboard event
+*/
+const onArrowAndAltPress = (event) => {
+  if (event.keyCode === RIGHT_ARROW_KEYCODE && event.altKey) {
+    currentScreenIndex = currentScreenIndex < ALL_SCREENS.length - 1 ? ++currentScreenIndex : 0;
   }
-  if (event.keyCode === leftArrowKeycode && event.altKey) {
-    currentScreen = currentScreen !== 0 ? --currentScreen : 0;
-    renderScreen(currentScreen);
+  if (event.keyCode === LEFT_ARROW_KEYCODE && event.altKey) {
+    currentScreenIndex = currentScreenIndex !== 0 ? --currentScreenIndex : 0;
   }
+  renderScreen(currentScreenIndex);
 };
 
-renderScreen(currentScreen);
-document.addEventListener(`keydown`, onArrowPress);
+renderScreen(currentScreenIndex);
+document.addEventListener(`keydown`, onArrowAndAltPress);
