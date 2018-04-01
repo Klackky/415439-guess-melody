@@ -65,5 +65,4 @@ ANSWERS.forEach((answer) => {
   });
 });
 
-
 export default guessArtist;
