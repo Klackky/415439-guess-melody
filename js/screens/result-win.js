@@ -1,6 +1,6 @@
 import createNewDomElement from '../utils/create-new-element';
 import renderScreen from '../utils/render-screen';
-import welcomeScreen from './welcome';
+import guessArtist from './guess-artist';
 const winTemplate = `<section class="main main--result">
   <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
 
@@ -11,10 +11,9 @@ const winTemplate = `<section class="main main--result">
   <span class="main-comparison">Вы заняли 2 место из 10. Это&nbsp;лучше чем у&nbsp;80%&nbsp;игроков</span>
   <span role="button" tabindex="0" class="main-replay">Сыграть ещё раз</span>
 </section>`;
-
 const win = createNewDomElement(winTemplate);
 const mainReply = win.querySelector(`.main-replay`);
 mainReply.addEventListener(`click`, () => {
-  renderScreen(welcomeScreen);
+  renderScreen(guessArtist);
 });
 export default win;

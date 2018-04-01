@@ -104,6 +104,10 @@ checkboxes.forEach((answer) => {
 // render random results screen
 genreAnswersSend.addEventListener(`click`, () => {
   renderScreen(randomResultsScreen);
+  // reset all checkboxes
+  checkboxes.forEach((checkbox) => {
+    checkbox.checked = false;
+  });
 });
 
 export default guessGenre;

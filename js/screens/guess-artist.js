@@ -7,7 +7,6 @@ const guessArtistTemplate = `<section class="main main--level main--level-artist
         cx="390" cy="390" r="370"
         class="timer-line"
         style="filter: url(.#blur); transform: rotate(-90deg) scaleY(-1); transform-origin: center"></circle>
-
       <div class="timer-value" xmlns="http://www.w3.org/1999/xhtml">
         <span class="timer-value-mins">05</span><!--
         --><span class="timer-value-dots">:</span><!--
@@ -18,7 +17,6 @@ const guessArtistTemplate = `<section class="main main--level main--level-artist
       <img class="main-mistake" src="img/wrong-answer.png" width="35" height="49">
       <img class="main-mistake" src="img/wrong-answer.png" width="35" height="49">
     </div>
-
     <div class="main-wrap">
       <h2 class="title main-title">Кто исполняет эту песню?</h2>
       <div class="player-wrapper">
@@ -39,7 +37,6 @@ const guessArtistTemplate = `<section class="main main--level main--level-artist
             Пелагея
           </label>
         </div>
-
         <div class="main-answer-wrapper">
           <input class="main-answer-r" type="radio" id="answer-2" name="answer" value="val-2"/>
           <label class="main-answer" for="answer-2">
@@ -48,7 +45,6 @@ const guessArtistTemplate = `<section class="main main--level main--level-artist
             Краснознаменная дивизия имени моей бабушки
           </label>
         </div>
-
         <div class="main-answer-wrapper">
           <input class="main-answer-r" type="radio" id="answer-3" name="answer" value="val-3"/>
           <label class="main-answer" for="answer-3">
