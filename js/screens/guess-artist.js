@@ -58,8 +58,8 @@ const guessArtistTemplate = `<section class="main main--level main--level-artist
   </section>`;
 
 const guessArtist = createNewDomElement(guessArtistTemplate);
-const ANSWERS = Array.from(guessArtist.querySelectorAll(`.main-answer-r`));
-ANSWERS.forEach((answer) => {
+const answers = Array.from(guessArtist.querySelectorAll(`.main-answer-r`));
+answers.forEach((answer) => {
   answer.addEventListener(`click`, () => {
     renderScreen(guessGenre);
   });

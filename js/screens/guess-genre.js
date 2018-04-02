@@ -96,8 +96,12 @@ genreAnswersSend.disabled = true;
 
 // if one of checkboxes is checked genreAnswersSend button becomes enabled
 checkboxes.forEach((answer) => {
-  answer.addEventListener(`click`, () => {
-    genreAnswersSend.disabled = false;
+  answer.addEventListener(`change`, () => {
+    if (answer.checked === true) {
+      genreAnswersSend.disabled = false;
+    } else {
+      genreAnswersSend.disabled = true;
+    }
   });
 });
 
