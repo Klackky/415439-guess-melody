@@ -1,8 +1,8 @@
 import createNewDomElement from '../utils/create-new-element';
 import renderScreen from '../utils/render-screen';
 import guessArtist from './guess-artist';
-const MAIN_SCREEN_CONTAINER = document.querySelector(`.main`);
-export const playButton = MAIN_SCREEN_CONTAINER.querySelector(`.main-play`);
+const mainScreenContainer = document.querySelector(`.main`);
+export const playButton = mainScreenContainer.querySelector(`.main-play`);
 const welcomeScreenTemplate = `<section class="main main--welcome">
     <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
     <button class="main-play">Начать игру</button>

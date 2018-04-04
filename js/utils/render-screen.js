@@ -1,11 +1,11 @@
-const MAIN_SCREEN_CONTAINER = document.querySelector(`.main`);
+const mainScreenContainer = document.querySelector(`.app`);
 /**
  * function responsible for removing existing screen
  *
  * @function removeExistingScreen
  */
 const removeExistingScreen = () => {
-  let existingScreen = MAIN_SCREEN_CONTAINER.querySelector(`.main`);
+  let existingScreen = mainScreenContainer.querySelector(`section.main`);
   if (existingScreen) {
     existingScreen.parentNode.removeChild(existingScreen);
   }
@@ -19,6 +19,6 @@ const removeExistingScreen = () => {
  */
 const renderScreen = (screen) => {
   removeExistingScreen();
-  return MAIN_SCREEN_CONTAINER.appendChild(screen);
+  return mainScreenContainer.appendChild(screen);
 };
 export default renderScreen;
