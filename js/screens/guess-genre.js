@@ -89,7 +89,7 @@ const guessGenreTemplate = `<section class="main main--level main--level-genre">
 const guessGenre = createNewDomElement(guessGenreTemplate);
 // generates random result from an array
 let randomResultsScreen = resultsArray[Math.floor(Math.random() * resultsArray.length)];
-const genreAnswersSend = guessGenre.querySelector(`.genre-answer-send`);
+let genreAnswersSend = guessGenre.querySelector(`.genre-answer-send`);
 const checkboxes = Array.from(guessGenre.querySelectorAll(`input[type="checkbox"]`));
 // genreAnswersSend button disabled by default
 genreAnswersSend.disabled = true;
@@ -97,7 +97,8 @@ genreAnswersSend.disabled = true;
 // if one of checkboxes is checked genreAnswersSend button becomes enabled
 checkboxes.forEach((answer) => {
   answer.addEventListener(`change`, () => {
-    if (answer.checked === true) {
+    let checkedCheckbox = checkboxes.some((x) => x.checked);
+    if (checkedCheckbox === true) {
       genreAnswersSend.disabled = false;
     } else {
       genreAnswersSend.disabled = true;
