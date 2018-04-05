@@ -93,15 +93,10 @@ let genreAnswersSend = guessGenre.querySelector(`.genre-answer-send`);
 const checkboxes = Array.from(guessGenre.querySelectorAll(`input[type="checkbox"]`));
 // genreAnswersSend button disabled by default
 genreAnswersSend.disabled = true;
-
 // if one of checkboxes is checked genreAnswersSend button becomes enabled
 checkboxes.forEach((answer) => {
   answer.addEventListener(`change`, () => {
-    if (checkboxes.some((checkbox) => checkbox.checked)) {
-      genreAnswersSend.disabled = false;
-    } else {
-      genreAnswersSend.disabled = true;
-    }
+    genreAnswersSend.disabled = !checkboxes.some((checkbox) => checkbox.checked);
   });
 });
 
