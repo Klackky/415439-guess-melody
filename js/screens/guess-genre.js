@@ -97,8 +97,7 @@ genreAnswersSend.disabled = true;
 // if one of checkboxes is checked genreAnswersSend button becomes enabled
 checkboxes.forEach((answer) => {
   answer.addEventListener(`change`, () => {
-    let checkedCheckbox = checkboxes.some((x) => x.checked);
-    if (checkedCheckbox === true) {
+    if (checkboxes.some((checkbox) => checkbox.checked)) {
       genreAnswersSend.disabled = false;
     } else {
       genreAnswersSend.disabled = true;
