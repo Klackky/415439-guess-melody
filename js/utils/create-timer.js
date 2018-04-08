@@ -1,3 +1,8 @@
+/**
+function responsible for creating timer.
+ * @param {number}  endtime - time left.
+ * @return {object} timer.
+ */
 export const createTimer = (endtime) => {
   return {
     endtime,

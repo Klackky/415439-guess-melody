@@ -1,3 +1,9 @@
+/**
+function responsible for calculating points collected by player.
+ * @param {array} answersArray - array of player`s answers with spent time.
+ * @param {number} lifes - number of remaining lifes.
+ * @return {number} player`s points.
+ */
 export const checkAnswers = (answersArray, lifes) => {
   const correctAnswersArray = answersArray.filter((answer) => answer === true);
   let result = 0;
