@@ -1,7 +1,7 @@
 /**
 function responsible for calculating points collected by player.
  * @param {array} answersArray - array of player`s answers with spent time.
- * @param {number} lives - number of remaining lifes.
+ * @param {number} lives - number of remaining lives.
  * @return {number} player`s points.
  */
 export const checkAnswers = (answersArray, lives) => {
