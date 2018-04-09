@@ -4,7 +4,7 @@ function responsible for calculating points collected by player.
  * @param {number} lifes - number of remaining lifes.
  * @return {number} player`s points.
  */
-export const checkAnswers = (answersArray, lifes) => {
+export const checkAnswers = (answersArray, lives) => {
   const correctAnswersArray = answersArray.filter((answer) => answer === true);
   let result = 0;
   if (correctAnswersArray.length < 9) {
@@ -18,11 +18,11 @@ export const checkAnswers = (answersArray, lifes) => {
         }
       }
     });
-    if (lifes === 2) {
+    if (lives === 2) {
       result -= 2;
-    } if (lifes === 1) {
+    } if (lives === 1) {
       result -= 4;
-    } if (lifes === 0) {
+    } if (lives === 0) {
       result -= 6;
     }
     return result;
