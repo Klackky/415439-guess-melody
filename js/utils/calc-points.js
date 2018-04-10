@@ -1,30 +1,25 @@
 /**
 function responsible for calculating points collected by player.
  * @param {array} answersArray - array of player`s answers with spent time.
- * @param {number} lives - number of remaining lives.
+ * @param {number} notes - number of remaining lives.
  * @return {number} player`s points.
  */
-export const checkAnswers = (answersArray, lives) => {
-  const correctAnswersArray = answersArray.filter((answer) => answer === true);
+export const calcPoints = (answersArray, notes) => {
+  const correctAnswersArray = answersArray.filter((answer) => answer.answer);
   let result = 0;
-  if (correctAnswersArray.length < 9) {
+  if (notes === 0 || correctAnswersArray.length < 9) {
     return -1;
   } else {
-    answersArray.forEach((answer, index) => {
-      if (index % 2 === 0 && answer) {
+    answersArray.forEach((answer) => {
+      if (answer.answer) {
         result += 1;
-        if (answersArray[++index] < 0.30) {
+        if (answer.time < 30) {
           result += 1;
         }
+      } else {
+        result -= 2;
       }
     });
-    if (lives === 2) {
-      result -= 2;
-    } if (lives === 1) {
-      result -= 4;
-    } if (lives === 0) {
-      result -= 6;
-    }
     return result;
   }
 };

@@ -12,7 +12,7 @@ export const showResult = (otherPlayersResults, playerResults) => {
   });
   const playersPlace = (sortByPoints.reverse()).findIndex((element) => element.points === playerResults.points) + 1;
   const playersQuantity = sortByPoints.length;
-  const percentage = (sortByPoints.length - playersPlace) / (playersQuantity - 1) * 100;
+  const percentage = (sortByPoints.length - playersPlace) / (playersQuantity) * 100;
   if (playerResults.points === -1 && playerResults.remainingNotes === 0) {
     return `У вас закончились все попытки. Ничего, повезёт в следующий раз!`;
   }

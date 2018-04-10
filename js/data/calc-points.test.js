@@ -1,22 +1,232 @@
 import {assert} from 'chai';
-import {checkAnswers} from '../utils/calc-points';
-const slowAndCorrectAnswersExample = [true, 0.45, true, 0.60, true, 0.70, true, 0.80, true, 0.90, true, 1.00, true, 1.10, true, 1.20, true, 1.30, true, 1.40];
-const negativeResult = [false, 0.45, false, 0.50, false, 0.50, true, 0.40, false, 0.50, false, 0.45, false, 0.50, false, 0.50, true, 0.40, false, 0.50];
-const fastNoMistakesResult = [true, 0.25, true, 0.20, true, 0.20, true, 0.10, true, 0.10, true, 0.15, true, 0.15, true, 0.10, true, 0.10, true, 0.10];
-const oneMistakeSlowResult = [true, 0.45, true, 0.60, true, 0.70, true, 0.80, true, 0.90, true, 1.00, true, 1.10, true, 1.20, true, 1.30, false, 1.40, true, 1.20];
-const randomResult = [true, 0.25, true, 0.20, true, 0.50, true, 0.10, true, 0.60, true, 0.15, true, 0.15, true, 0.60, true, 0.60, true, 0.10, false, 0.20];
+import {calcPoints} from '../utils/calc-points';
+const slowAndCorrectAnswers = [
+  {
+    answer: true,
+    time: 40
+  },
+  {
+    answer: true,
+    time: 60
+  },
+  {
+    answer: true,
+    time: 40
+  },
+  {
+    answer: true,
+    time: 40
+  },
+  {
+    answer: true,
+    time: 60
+  },
+  {
+    answer: true,
+    time: 50
+  },
+  {
+    answer: true,
+    time: 40
+  },
+  {
+    answer: true,
+    time: 60
+  },
+  {
+    answer: true,
+    time: 60
+  },
+  {
+    answer: true,
+    time: 60
+  }
+];
+const negativeResult = [
+  {
+    answer: true,
+    time: 40
+  },
+  {
+    answer: true,
+    time: 60
+  },
+  {
+    answer: true,
+    time: 40
+  },
+  {
+    answer: false,
+    time: 40
+  },
+  {
+    answer: true,
+    time: 60
+  },
+  {
+    answer: false,
+    time: 50
+  },
+  {
+    answer: false,
+    time: 40
+  },
+  {
+    answer: true,
+    time: 20
+  },
+  {
+    answer: false,
+    time: 60
+  },
+  {
+    answer: false,
+    time: 60
+  }
+];
+const fastNoMistakesResult = [
+  {
+    answer: true,
+    time: 20
+  },
+  {
+    answer: true,
+    time: 10
+  },
+  {
+    answer: true,
+    time: 20
+  },
+  {
+    answer: true,
+    time: 20
+  },
+  {
+    answer: true,
+    time: 20
+  },
+  {
+    answer: true,
+    time: 20
+  },
+  {
+    answer: true,
+    time: 10
+  },
+  {
+    answer: true,
+    time: 20
+  },
+  {
+    answer: true,
+    time: 20
+  },
+  {
+    answer: true,
+    time: 20
+  }
+];
+const oneMistakeSlowResult = [
+  {
+    answer: true,
+    time: 60
+  },
+  {
+    answer: true,
+    time: 50
+  },
+  {
+    answer: true,
+    time: 40
+  },
+  {
+    answer: true,
+    time: 60
+  },
+  {
+    answer: true,
+    time: 60
+  },
+  {
+    answer: true,
+    time: 60
+  },
+  {
+    answer: true,
+    time: 60
+  },
+  {
+    answer: true,
+    time: 50
+  },
+  {
+    answer: true,
+    time: 40
+  },
+  {
+    answer: true,
+    time: 60
+  },
+  {
+    answer: false,
+    time: 60
+  }
+];
+const randomResult = [
+  {
+    answer: true,
+    time: 20
+  },
+  {
+    answer: true,
+    time: 20
+  },
+  {
+    answer: true,
+    time: 50
+  },
+  {
+    answer: true,
+    time: 60
+  },
+  {
+    answer: true,
+    time: 10
+  },
+  {
+    answer: true,
+    time: 40
+  },
+  {
+    answer: true,
+    time: 10
+  },
+  {
+    answer: true,
+    time: 20
+  },
+  {
+    answer: true,
+    time: 40
+  },
+  {
+    answer: true,
+    time: 10
+  },
+  {
+    answer: false,
+    time: 10
+  },
+];
 describe(`Check if player points calculated correctly`, () => {
 
   it(`should calculate points correctly`, () => {
-    assert.equal(checkAnswers(negativeResult, 0), -1);
-    assert.equal(checkAnswers(slowAndCorrectAnswersExample, 3), 10);
-    assert.equal(checkAnswers(slowAndCorrectAnswersExample, 2), 8);
-    assert.equal(checkAnswers(oneMistakeSlowResult, 0), 4);
-    assert.equal(checkAnswers(oneMistakeSlowResult, 2), 8);
-    assert.equal(checkAnswers(fastNoMistakesResult, 3), 20);
-    assert.equal(checkAnswers(fastNoMistakesResult, 2), 18);
-    assert.equal(checkAnswers(fastNoMistakesResult, 2), 18);
-    assert.equal(checkAnswers(randomResult, 0), 10);
+    assert.equal(calcPoints(negativeResult, 0), -1);
+    assert.equal(calcPoints(slowAndCorrectAnswers, 3), 10);
+    assert.equal(calcPoints(oneMistakeSlowResult, 2), 8);
+    assert.equal(calcPoints(fastNoMistakesResult, 3), 20);
+    assert.equal(calcPoints(randomResult, 2), 14);
+    assert.equal(calcPoints(randomResult, 0), -1);
   });
 
 });
