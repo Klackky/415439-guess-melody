@@ -48,6 +48,12 @@ gulp.task('scripts', function () {
 });
 
 gulp.task('test', function () {
+  return gulp
+    .src(['js/**/*.test.js'], { read: false })
+    .pipe(mocha({
+      compilers: ['js:babel-register'], // Включим поддержку "import/export" в Mocha тестах
+      reporter: 'spec'       // Вид в котором я хочу отображать результаты тестирования
+    }));
 });
 
 gulp.task('imagemin', ['copy'], function () {
@@ -92,14 +98,6 @@ gulp.task('serve', ['assemble'], function () {
     ui: false
   });
 
-  gulp.task('test', function () {
-    return gulp
-      .src(['js/**/*.test.js'], { read: false })
-      .pipe(mocha({
-        compilers: ['js:babel-register'], // Включим поддержку "import/export" в Mocha тестах
-        reporter: 'spec'       // Вид в котором я хочу отображать результаты тестирования
-      }));
-  });
 
   gulp.watch('sass/**/*.{scss,sass}', ['style']);
   gulp.watch('*.html').on('change', (e) => {
