@@ -1,38 +1,38 @@
 import {assert} from 'chai';
 import {showResult} from '../utils/show-result';
 const playerResultsFailExample = {
-  points: -1, remainingNotes: 0, remainingTime: 0.40
+  points: -1, remainingNotes: 0, remainingTime: 40
 };
 const playerResultsNoTimeExample = {
   points: -1, remainingNotes: 1, remainingTime: 0
 };
 const playerResultsWinExample = {
-  points: 11, remainingNotes: 0, remainingTime: 0.40
+  points: 11, remainingNotes: 0, remainingTime: 40
 };
 const playerResultsExample = {
-  points: 7, remainingNotes: 0, remainingTime: 0.10
+  points: 7, remainingNotes: 0, remainingTime: 10
 };
 
 const otherPlayersResultsExpample = [
   {
     points: 10,
     remainingNotes: 3,
-    remainingTime: 1.00,
+    remainingTime: 60,
   },
   {
     points: 8,
     remainingNotes: 3,
-    remainingTime: 0.12,
+    remainingTime: 12,
   },
   {
     points: 5,
     remainingNotes: 2,
-    remainingTime: 1.00,
+    remainingTime: 50,
   },
   {
     points: 3,
     remainingNotes: 1,
-    remainingTime: 0.50,
+    remainingTime: 50,
   }
 ];
 describe(`Check if result is correct`, () => {
