@@ -7,10 +7,10 @@ const playerResultsNoTimeExample = {
   points: -1, remainingNotes: 1, remainingTime: 0
 };
 const playerResultsWinExample = {
-  points: 11, remainingNotes: 0, remainingTime: 40
+  points: 11, remainingNotes: 1, remainingTime: 40
 };
 const playerResultsExample = {
-  points: 7, remainingNotes: 0, remainingTime: 10
+  points: 7, remainingNotes: 1, remainingTime: 10
 };
 
 const otherPlayersResultsExpample = [

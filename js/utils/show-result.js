@@ -5,7 +5,7 @@ function responsible for showing the final results.
  * @return {string} final result.
  */
 export const showResult = (otherPlayersResults, playerResults) => {
-  if (playerResults.points === -1 && playerResults.remainingNotes === 0) {
+  if (playerResults.remainingNotes === 0) {
     return `У вас закончились все попытки. Ничего, повезёт в следующий раз!`;
   }
   if (playerResults.points === -1 && playerResults.remainingTime === 0) {
