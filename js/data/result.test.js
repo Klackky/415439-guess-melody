@@ -13,7 +13,7 @@ const playerResultsExample = {
   points: 7, remainingNotes: 1, remainingTime: 10
 };
 
-const otherPlayersResultsExpample = [
+export const otherPlayersResultsExpample = [
   {
     points: 10,
     remainingNotes: 3,
