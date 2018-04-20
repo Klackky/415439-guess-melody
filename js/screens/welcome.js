@@ -1,6 +1,8 @@
 import createNewDomElement from '../utils/create-new-element';
 import renderScreen from '../utils/render-screen';
 import guessArtist from './guess-artist';
+import {playerData} from '../data/game-data.js';
+import {levels} from '../data/game-data.js';
 const mainScreenContainer = document.querySelector(`.main`);
 export const playButton = mainScreenContainer.querySelector(`.main-play`);
 const welcomeScreenTemplate = `<section class="main main--welcome">
@@ -15,6 +17,6 @@ const welcomeScreenTemplate = `<section class="main main--welcome">
   </section>`;
 const welcomeScreen = createNewDomElement(welcomeScreenTemplate);
 welcomeScreen.querySelector(`.main-play`).addEventListener(`click`, () => {
-  renderScreen(guessArtist);
+  renderScreen(guessArtist(levels[playerData.level]));
 });
 export default welcomeScreen;
