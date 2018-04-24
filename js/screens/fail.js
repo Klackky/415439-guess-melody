@@ -1,9 +1,5 @@
 import AbstractView from '../abstract-view.js';
 export default class FailView extends AbstractView {
-//  constructor(state) {
-//    super();
-//    this.state = state;
-//  }
   get template() {
     return `<section class="main main--result">
       <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>

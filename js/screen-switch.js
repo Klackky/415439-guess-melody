@@ -37,17 +37,18 @@ const renderGuessArtistScreen = (state) => {
     }
   };
   guessArtistView.onClick = () => {
-    const button = guessArtistView.element.querySelector(`.player-control`);
     const player = guessArtistView.element.querySelector(`audio`);
-    if (button.classList.contains(`player-control--play`)) {
-      player.play();
-      button.classList.remove(`player-control--play`);
-      button.classList.add(`player-control--pause`);
-    } else {
-      player.pause();
-      button.classList.add(`player-control--play`);
-      button.classList.remove(`player-control--pause`);
-    }
+    document.addEventListener(`click`, function (event) {
+      if (event.target.classList.contains(`player-control--play`)) {
+        event.target.classList.remove(`player-control--play`);
+        event.target.classList.add(`player-control--pause`);
+        player.play();
+      } else {
+        player.pause();
+        event.target.classList.add(`player-control--play`);
+        event.target.classList.remove(`player-control--pause`);
+      }
+    }, false);
   };
 };
 
@@ -55,8 +56,15 @@ const renderGuessGenre = (state) => {
   const guessGenreView = new GuessGenreView(state);
   renderScreen(guessGenreView.element);
   const genreElement = guessGenreView.element;
+  let genreAnswersSend = genreElement.querySelector(`.genre-answer-send`);
+  const checkboxes = Array.from(genreElement.querySelectorAll(`input[type="checkbox"]`));
+  genreAnswersSend.disabled = true;
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener(`change`, () => {
+      genreAnswersSend.disabled = !checkboxes.some((answer) => answer.checked);
+    });
+  });
   guessGenreView.onAnswer = () => {
-    const checkboxes = Array.from(genreElement.querySelectorAll(`input[type="checkbox"]`));
     let notCorrect = false;
     checkboxes.forEach((checkbox, index) => {
       if (checkbox.checked && !state.answers[index].isCorrect || !checkbox.checked && state.answers[index].isCorrect) {
@@ -80,6 +88,7 @@ const renderGuessGenre = (state) => {
     }
   };
   const players = Array.from(guessGenreView.element.querySelectorAll(`.player`));
+
   players.forEach((player) => {
     player.addEventListener(`click`, (evt) => {
       evt.preventDefault();
