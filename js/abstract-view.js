@@ -24,7 +24,7 @@ export default class AbstractView {
     return createNewDomElement(this.template);
   }
 
-//  bind(element) {
-//    // bind handlers if required
-//  }
+  bind() {
+  //   bind handlers if required
+  }
 }

@@ -90,8 +90,8 @@ const renderGuessGenre = (state) => {
   const players = Array.from(guessGenreView.element.querySelectorAll(`.player`));
 
   players.forEach((player) => {
-    player.addEventListener(`click`, (evt) => {
-      evt.preventDefault();
+    player.addEventListener(`click`, (event) => {
+      event.preventDefault();
       const button = player.querySelector(`.player-control`);
       const audio = player.querySelector(`audio`);
       if (button.classList.contains(`player-control--play`)) {
