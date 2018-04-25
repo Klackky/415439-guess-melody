@@ -19,92 +19,29 @@ const renderGuessArtistScreen = (state) => {
   const guessArtistView = new ArtistView(state);
   renderScreen(guessArtistView.element);
   guessArtistView.onAnswer = () => {
-    if (event.target.value !== state.correct) {
-      playerData.mistakes++;
-      playerData.answers.push({answer: false, time: 30});
-      renderGuessArtistScreen(levels[playerData.level]);
-      if (playerData.mistakes >= 3) {
-        renderFailScreen();
-      }
-    } else {
-      if (event.target.value === state.correct && playerData.level < 4) {
-        playerData.answers.push({answer: true, time: 30});
-        renderGuessArtistScreen(levels[++playerData.level]);
-      } else {
-        playerData.answers.push({answer: true, time: 30});
-        renderGuessGenre(levels[++playerData.level]);
-      }
+    if (playerData.mistakes >= 3) {
+      return renderFailScreen();
     }
-  };
-  guessArtistView.onClick = () => {
-    const player = guessArtistView.element.querySelector(`audio`);
-    document.addEventListener(`click`, function (event) {
-      if (event.target.classList.contains(`player-control--play`)) {
-        event.target.classList.remove(`player-control--play`);
-        event.target.classList.add(`player-control--pause`);
-        player.play();
-      } else {
-        player.pause();
-        event.target.classList.add(`player-control--play`);
-        event.target.classList.remove(`player-control--pause`);
-      }
-    }, false);
+    if (playerData.level < 4) {
+      return renderGuessArtistScreen(levels[++playerData.level]);
+    }
+    return renderGuessGenre(levels[++playerData.level]);
   };
 };
 
 const renderGuessGenre = (state) => {
   const guessGenreView = new GuessGenreView(state);
   renderScreen(guessGenreView.element);
-  const genreElement = guessGenreView.element;
-  let genreAnswersSend = genreElement.querySelector(`.genre-answer-send`);
-  const checkboxes = Array.from(genreElement.querySelectorAll(`input[type="checkbox"]`));
-  genreAnswersSend.disabled = true;
-  checkboxes.forEach((checkbox) => {
-    checkbox.addEventListener(`change`, () => {
-      genreAnswersSend.disabled = !checkboxes.some((answer) => answer.checked);
-    });
-  });
   guessGenreView.onAnswer = () => {
-    let notCorrect = false;
-    checkboxes.forEach((checkbox, index) => {
-      if (checkbox.checked && !state.answers[index].isCorrect || !checkbox.checked && state.answers[index].isCorrect) {
-        notCorrect = true;
-      }
-      checkbox.checked = false;
-    });
-    if (!notCorrect && playerData.level < 9) {
-      renderGuessGenre(levels[++playerData.level]);
-      playerData.answers.push({answer: true, time: 30});
-    } else if (notCorrect) {
-      playerData.mistakes++;
-      playerData.answers.push({answer: false, time: 30});
-      renderGuessGenre(levels[playerData.level]);
-      if (playerData.mistakes >= 3) {
-        renderFailScreen();
-      }
+    if (playerData.level < 9) {
+      return renderGuessGenre(levels[++playerData.level]);
+    }
+    if (playerData.mistakes >= 3) {
+      return renderFailScreen();
     } else {
-      playerData.answers.push({answer: true, time: 30});
-      renderWinScreen();
+      return renderWinScreen();
     }
   };
-  const players = Array.from(guessGenreView.element.querySelectorAll(`.player`));
-
-  players.forEach((player) => {
-    player.addEventListener(`click`, (event) => {
-      event.preventDefault();
-      const button = player.querySelector(`.player-control`);
-      const audio = player.querySelector(`audio`);
-      if (button.classList.contains(`player-control--play`)) {
-        audio.play();
-        button.classList.remove(`player-control--play`);
-        button.classList.add(`player-control--pause`);
-      } else {
-        audio.pause();
-        button.classList.add(`player-control--play`);
-        button.classList.remove(`player-control--pause`);
-      }
-    });
-  });
 };
 
 const renderFailScreen = () => {
@@ -117,6 +54,7 @@ const renderFailScreen = () => {
     renderGuessArtistScreen(levels[playerData.level]);
   };
 };
+
 const renderWinScreen = () => {
   const winScreenView = new WinView();
   renderScreen(winScreenView.element);

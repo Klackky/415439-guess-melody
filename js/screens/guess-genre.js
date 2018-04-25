@@ -2,6 +2,7 @@ import HeaderView from './header.js';
 import AbstractView from '../abstract-view.js';
 import PlayerView from './player-view.js';
 import {playerData} from '../data/game-data.js';
+import {checkCorrectCheckboxes} from '../utils/tools.js';
 export default class GuessGenreView extends AbstractView {
   constructor(state) {
     super();
@@ -26,21 +27,42 @@ export default class GuessGenreView extends AbstractView {
   onAnswer() {
 
   }
-  onClick() {
 
-  }
   bind() {
+    const checkboxes = Array.from(this.element.querySelectorAll(`input[type="checkbox"]`));
     const genreAnswersSend = this.element.querySelector(`.genre-answer-send`);
     const submitHandler = (evt) => {
       evt.stopPropagation();
       evt.preventDefault();
-
+      checkCorrectCheckboxes(checkboxes, this.state);
       this.onAnswer();
     };
+
+    genreAnswersSend.disabled = true;
     genreAnswersSend.addEventListener(`click`, submitHandler);
-    this.element.querySelector(`.player-control`).addEventListener(`click`, (evt) => {
-      evt.preventDefault();
-      this.onClick();
+    genreAnswersSend.disabled = true;
+    checkboxes.forEach((checkbox) => {
+      checkbox.addEventListener(`change`, () => {
+        genreAnswersSend.disabled = !checkboxes.some((answer) => answer.checked);
+      });
+    });
+
+    const players = Array.from(this.element.querySelectorAll(`.player`));
+    players.forEach((player) => {
+      player.addEventListener(`click`, (event) => {
+        event.preventDefault();
+        const button = player.querySelector(`.player-control`);
+        const audio = player.querySelector(`audio`);
+        if (button.classList.contains(`player-control--play`)) {
+          audio.play();
+          button.classList.remove(`player-control--play`);
+          button.classList.add(`player-control--pause`);
+        } else {
+          audio.pause();
+          button.classList.add(`player-control--play`);
+          button.classList.remove(`player-control--pause`);
+        }
+      });
     });
   }
 }

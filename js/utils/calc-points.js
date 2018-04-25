@@ -5,9 +5,8 @@ function responsible for calculating points collected by player.
  * @return {number} player`s points.
  */
 export const calcPoints = (answersArray, notes) => {
-  const correctAnswersArray = answersArray.filter((answer) => answer.answer);
   let result = 0;
-  if (notes === 0 || correctAnswersArray.length < 9) {
+  if (notes === 0 || answersArray.length < 9) {
     return -1;
   } else {
     answersArray.forEach((answer) => {

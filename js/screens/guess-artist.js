@@ -1,6 +1,7 @@
 import HeaderView from './header.js';
 import PlayerView from './player-view.js';
 import {playerData} from '../data/game-data.js';
+import {checkCorrectAnswer} from '../utils/tools.js';
 import AbstractView from '../abstract-view.js';
 export default class ArtistView extends AbstractView {
   constructor(state) {
@@ -27,22 +28,32 @@ export default class ArtistView extends AbstractView {
       </div>
     </section>`;
   }
+
   onAnswer() {
   }
-  onClick() {
 
-  }
   bind(element) {
     const answers = Array.from(element.querySelectorAll(`.main-answer-r`));
     answers.forEach((answer) => {
       answer.addEventListener(`click`, (evt) => {
         evt.preventDefault();
+        checkCorrectAnswer(answer, this.state);
         this.onAnswer();
       });
     });
-    this.element.querySelector(`.player-control`).addEventListener(`click`, (evt) => {
-      evt.preventDefault();
-      this.onClick();
-    });
+
+    const player = this.element.querySelector(`.player-control`);
+    const audio = this.element.querySelector(`audio`);
+    player.addEventListener(`click`, function (event) {
+      if (event.target.classList.contains(`player-control--play`)) {
+        event.target.classList.remove(`player-control--play`);
+        event.target.classList.add(`player-control--pause`);
+        audio.play();
+      } else {
+        audio.pause();
+        event.target.classList.add(`player-control--play`);
+        event.target.classList.remove(`player-control--pause`);
+      }
+    }, false);
   }
 }

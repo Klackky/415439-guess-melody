@@ -19,10 +19,4 @@ export default class PlayerView extends AbstractView {
   onClick() {
 
   }
-  bind() {
-    this.element.querySelector(`.player-control`).addEventListener(`click`, (evt) => {
-      evt.preventDefault();
-      this.onClick();
-    });
-  }
 }
