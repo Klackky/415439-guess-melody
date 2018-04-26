@@ -10,8 +10,8 @@ export const roundTime = (time) => {
   return roundedTime;
 };
 
-export const checkCorrectAnswer = (answer, state) => {
-  if (answer.value !== state.correct) {
+export const checkCorrectAnswer = (answer, question) => {
+  if (answer.value !== question.correct) {
     playerData.mistakes++;
     playerData.answers.push({answer: false, time: 30});
   } else {

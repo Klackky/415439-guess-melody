@@ -18,7 +18,11 @@ export const renderWelcomeScreen = () => {
 const renderGuessArtistScreen = (state) => {
   const guessArtistView = new ArtistView(state);
   renderScreen(guessArtistView.element);
-  guessArtistView.onAnswer = () => {
+  guessArtistView.onAnswer = (isCorrect) => {
+    playerData.answers.push({answer: isCorrect, time: 30});
+    if (!isCorrect) {
+      playerData.mistakes++;
+    }
     if (playerData.mistakes >= 3) {
       return renderFailScreen();
     }
@@ -32,15 +36,18 @@ const renderGuessArtistScreen = (state) => {
 const renderGuessGenre = (state) => {
   const guessGenreView = new GuessGenreView(state);
   renderScreen(guessGenreView.element);
-  guessGenreView.onAnswer = () => {
-    if (playerData.level < 9) {
-      return renderGuessGenre(levels[++playerData.level]);
+  guessGenreView.onAnswer = (isCorrect) => {
+    playerData.answers.push({answer: isCorrect, time: 30});
+    if (!isCorrect) {
+      playerData.mistakes++;
     }
     if (playerData.mistakes >= 3) {
       return renderFailScreen();
-    } else {
-      return renderWinScreen();
     }
+    if (playerData.level < 9) {
+      return renderGuessGenre(levels[++playerData.level]);
+    }
+    return renderWinScreen();
   };
 };
 
